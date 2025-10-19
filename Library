@@ -669,6 +669,7 @@ do
             TextSize = 14;
             Text = ColorPicker.Title,--Info.Default;
             TextWrapped = false;
+            TextColor3 = Color3.fromRGB(0, 85, 255)
             ZIndex = 16;
             Parent = PickerFrameInner;
         });
