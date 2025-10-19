@@ -191,7 +191,7 @@ function Library:MakeDraggable(Instance, Cutoff)
                     Mouse.Y - ObjPos.Y + (Instance.Size.Y.Offset * Instance.AnchorPoint.Y)
                 );
 
-                task.wait();
+                task.wait(0.016);
             end;
         end;
     end)
