@@ -143,8 +143,8 @@ function Library:ApplyTextStroke(Inst, StrokeColor)
 end;
 
 function Library:CreateLabel(Properties, IsHud)
-    local strokeColor = Properties.StrokeColor -- grab it first
-    Properties.StrokeColor = nil -- remove it so we don’t try to assign it to TextLabel
+    local strokeColor = Properties.StrokeColor
+    Properties.StrokeColor = nil
 
     local _Instance = Library:Create('TextLabel', {
         BackgroundTransparency = 1;
