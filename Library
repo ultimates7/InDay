@@ -673,7 +673,6 @@ do
             Parent = PickerFrameInner;
         });
 
-
         local ContextMenu = {}
         do
             ContextMenu.Options = {}
