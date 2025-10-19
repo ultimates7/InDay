@@ -132,15 +132,14 @@ function Library:Create(Class, Properties)
     return _Instance;
 end;
 
-function Library:ApplyTextStroke(Inst)
-    Inst.TextStrokeTransparency = 1;
-
+function Library:ApplyTextStroke(Inst, StrokeColor)
+    Inst.TextStrokeTransparency = 1
     Library:Create('UIStroke', {
-        Color = Color3.new(0, 0, 0);
+        Color = StrokeColor or Color3.new(0, 0, 0);
         Thickness = 1;
         LineJoinMode = Enum.LineJoinMode.Miter;
         Parent = Inst;
-    });
+    })
 end;
 
 function Library:CreateLabel(Properties, IsHud)
@@ -150,16 +149,17 @@ function Library:CreateLabel(Properties, IsHud)
         TextColor3 = Library.FontColor;
         TextSize = 16;
         TextStrokeTransparency = 0;
-    });
+    })
 
-    Library:ApplyTextStroke(_Instance);
+    -- Apply stroke, using optional Properties.StrokeColor or default black
+    Library:ApplyTextStroke(_Instance, Properties.StrokeColor)
 
     Library:AddToRegistry(_Instance, {
         TextColor3 = 'FontColor';
-    }, IsHud);
+    }, IsHud)
 
-    return Library:Create(_Instance, Properties);
-end;
+    return Library:Create(_Instance, Properties)
+end
 
 DragLocked = false
 
@@ -3001,6 +3001,7 @@ function Library:CreateWindow(...)
         TextXAlignment = Enum.TextXAlignment.Center;
         TextYAlignment = Enum.TextYAlignment.Center;
         ZIndex = 1;
+        StrokeColor = Color3.fromRGB(0, 170, 255),
         Parent = Inner;
     });
 
