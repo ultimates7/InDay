@@ -165,33 +165,33 @@ end
 
 DragLocked = false
 
-function Library:MakeDraggable(Instance, Cutoff)
-    Instance.Active = true;
+function Library:MakeDraggable(UIObject, Cutoff)
+    UIObject.Active = true;
 
-    Instance.InputBegan:Connect(function(Input)
+    UIObject.InputBegan:Connect(function(Input)
         if Input.UserInputType == Enum.UserInputType.MouseButton1 then
             if self.DragLocked then
                 return
             end
 
             local ObjPos = Vector2.new(
-                Mouse.X - Instance.AbsolutePosition.X,
-                Mouse.Y - Instance.AbsolutePosition.Y
+                Mouse.X - UIObject.AbsolutePosition.X,
+                Mouse.Y - UIObject.AbsolutePosition.Y
             );
 
             if ObjPos.Y > (Cutoff or 40) then
                 return;
             end;
 
-            local Outline = Instance:Clone()
+            local Outline = UIObject:Clone()
             Outline:ClearAllChildren()
             Outline.BackgroundTransparency = 1
             Outline.BorderSizePixel = 0
             Outline.BorderColor3 = Library.AccentColor
-            Outline.ZIndex = Instance.ZIndex + 200
-            Outline.Parent = Instance.Parent
-            Outline.Position = Instance.Position
-            Outline.Size = Instance.Size
+            Outline.ZIndex = UIObject.ZIndex + 200
+            Outline.Parent = UIObject.Parent
+            Outline.Position = UIObject.Position
+            Outline.Size = UIObject.Size
             Outline.Visible = true
 
             local Stroke = Instance.new("UIStroke")
@@ -199,7 +199,7 @@ function Library:MakeDraggable(Instance, Cutoff)
             Stroke.Color = Library.AccentColor
             Stroke.Parent = Outline
 
-            Instance.Visible = false
+            UIObject.Visible = false
 
             while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                 if self.DragLocked then break end
@@ -207,16 +207,16 @@ function Library:MakeDraggable(Instance, Cutoff)
 
                 Outline.Position = UDim2.new(
                     0,
-                    Mouse.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
+                    Mouse.X - ObjPos.X + (UIObject.Size.X.Offset * UIObject.AnchorPoint.X),
                     0,
-                    Mouse.Y - ObjPos.Y + (Instance.Size.Y.Offset * Instance.AnchorPoint.Y)
+                    Mouse.Y - ObjPos.Y + (UIObject.Size.Y.Offset * UIObject.AnchorPoint.Y)
                 );
 
                 task.wait();
             end;
 
-            Instance.Position = Outline.Position
-            Instance.Visible = true
+            UIObject.Position = Outline.Position
+            UIObject.Visible = true
             Outline:Destroy()
         end;
     end)
