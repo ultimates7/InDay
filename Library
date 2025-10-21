@@ -183,10 +183,24 @@ function Library:MakeDraggable(Instance, Cutoff)
                 return;
             end;
 
+            local Outline = Instance:Clone()
+            Outline:ClearAllChildren()
+            Outline.BackgroundTransparency = 1
+            Outline.BorderSizePixel = 2
+            Outline.BorderColor3 = Library.AccentColor
+            Outline.ZIndex = Instance.ZIndex + 200
+            Outline.Parent = Instance.Parent
+            Outline.Position = Instance.Position
+            Outline.Size = Instance.Size
+            Outline.Visible = true
+
+            Instance.Visible = false
+
             while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                 if self.DragLocked then break end
                 if not InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) then break end
-                Instance.Position = UDim2.new(
+
+                Outline.Position = UDim2.new(
                     0,
                     Mouse.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
                     0,
@@ -195,6 +209,9 @@ function Library:MakeDraggable(Instance, Cutoff)
 
                 task.wait();
             end;
+            Instance.Position = Outline.Position
+            Instance.Visible = true
+            Outline:Destroy()
         end;
     end)
 end;
