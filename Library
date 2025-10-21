@@ -6,6 +6,7 @@ local Players = game:GetService('Players');
 local RunService = game:GetService('RunService')
 local TweenService = game:GetService('TweenService');
 local RenderStepped = RunService.RenderStepped;
+local Heartbeat = RunService.Heartbeat;
 local LocalPlayer = Players.LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
 
@@ -49,7 +50,7 @@ local Library = {
 local RainbowStep = 0
 local Hue = 0
 
-table.insert(Library.Signals, RenderStepped:Connect(function(Delta)
+table.insert(Library.Signals, Heartbeat:Connect(function(Delta)
     RainbowStep = RainbowStep + Delta
 
     if RainbowStep >= (1 / 60) then
@@ -944,7 +945,7 @@ do
                     ColorPicker.Vib = 1 - ((MouseY - MinY) / (MaxY - MinY));
                     ColorPicker:Display();
 
-                    RenderStepped:Wait();
+                    task.wait();
                 end;
 
                 Library:AttemptSave();
@@ -961,7 +962,7 @@ do
                     ColorPicker.Hue = ((MouseY - MinY) / (MaxY - MinY));
                     ColorPicker:Display();
 
-                    RenderStepped:Wait();
+                    task.wait();
                 end;
 
                 Library:AttemptSave();
@@ -994,7 +995,7 @@ do
 
                         ColorPicker:Display();
 
-                        RenderStepped:Wait();
+                        task.wait();
                     end;
 
                     Library:AttemptSave();
@@ -2164,7 +2165,7 @@ do
                         Library:SafeCallback(Slider.Changed, Slider.Value);
                     end;
 
-                    RenderStepped:Wait();
+                    task.wait();
                 end;
 
                 Library:AttemptSave();
