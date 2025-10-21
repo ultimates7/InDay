@@ -195,7 +195,7 @@ function Library:MakeDraggable(UIObject, Cutoff)
             Outline.Visible = true
 
             local Stroke = Instance.new("UIStroke")
-            Stroke.Thickness = 2
+            Stroke.Thickness = 1
             Stroke.Color = Library.AccentColor
             Stroke.Parent = Outline
 
