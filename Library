@@ -186,7 +186,7 @@ function Library:MakeDraggable(Instance, Cutoff)
             local Outline = Instance:Clone()
             Outline:ClearAllChildren()
             Outline.BackgroundTransparency = 1
-            Outline.BorderSizePixel = 2
+            Outline.BorderSizePixel = 0
             Outline.BorderColor3 = Library.AccentColor
             Outline.ZIndex = Instance.ZIndex + 200
             Outline.Parent = Instance.Parent
@@ -197,7 +197,6 @@ function Library:MakeDraggable(Instance, Cutoff)
             local Stroke = Instance.new("UIStroke")
             Stroke.Thickness = 2
             Stroke.Color = Library.AccentColor
-            Stroke.Transparency = 0
             Stroke.Parent = Outline
 
             Instance.Visible = false
@@ -215,6 +214,7 @@ function Library:MakeDraggable(Instance, Cutoff)
 
                 task.wait();
             end;
+
             Instance.Position = Outline.Position
             Instance.Visible = true
             Outline:Destroy()
